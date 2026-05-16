@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elight Media — Visual Optimization for Beauty Brands</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Open+Sans:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D4AF37;
+            --azure: #43CFFD;
+            --red: #EA110B;
+            --onyx: #18181B;
+            --void: #09090B;
+            --white: #F9F9F9;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --subtext: #71717A;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--void) 0%, var(--onyx) 100%);
+            color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 480px;
+            height: 100vh;
+            max-height: 1000px;
+            position: relative;
+            background: var(--dark);
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.25);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 600px) {
+            .presentation-container {
+                height: 95vh;
+                max-height: 1000px;
+                border-radius: 20px;
+                border: 1px solid rgba(212, 175, 55, 0.2);
+            }
+        }
+
+        .slides-wrapper {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(1.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px 28px 100px;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .slide.next {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .photo-section {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(67, 207, 253, 0.08) 100%);
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .photo-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .photo-placeholder {
+            text-align: center;
+            color: var(--subtext);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        .photo-placeholder-icon {
+            font-size: 2.5rem;
+            opacity: 0.5;
+            margin-bottom: 8px;
+        }
+
+        .photo-placeholder-text {
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .content-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+            animation: contentFadeIn 0.7s ease 0.2s both;
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 6px 16px;
+            border-radius: 24px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            width: fit-content;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        h2 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.15;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin: 8px 0;
+        }
+
+        h2 span {
+            color: var(--primary);
+            text-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.92);
+            margin: 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            color: var(--dark);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 800;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+            border: 2px solid var(--light);
+            font-family: 'Raleway', sans-serif;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .cta-button:hover {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(212, 175, 55, 0.35);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--light);
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+        }
+
+        .progress-container {
+            position: absolute;
+            top: 20px;
+            left: 28px;
+            right: 28px;
+            z-index: 30;
+            display: flex;
+            gap: 6px;
+            height: 4px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--azure) 100%);
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+
+        .progress-bar.active .progress-fill {
+            width: 100%;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 24px;
+            left: 28px;
+            right: 28px;
+            z-index: 30;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .btn-nav {
+            background: rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .btn-nav:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
+            transform: scale(1.12);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-nav svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .slide-counter {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.75rem;
+            color: var(--subtext);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .keyboard-hint {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.65rem;
+            opacity: 0.4;
+            text-align: center;
+            color: var(--subtext);
+            margin-top: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .key {
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            padding: 2px 6px;
+            margin: 0 2px;
+            font-family: monospace;
+            font-size: 0.65rem;
+        }
+
+        @media (max-width: 480px) {
+            .presentation-container {
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            .slide {
+                padding: 50px 20px 90px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+
+            .photo-section {
+                height: 240px;
+                margin-bottom: 20px;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.75rem;
+            }
+
+            .btn-nav {
+                width: 44px;
+                height: 44px;
+            }
+
+            .btn-nav svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .controls {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+            }
+
+            .progress-container {
+                left: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            h2 {
+                font-size: 2.8rem;
+            }
+
+            .photo-section {
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container" id="presentation">
+    
+    <div class="progress-container" id="progressContainer"></div>
+
+    <div class="slides-wrapper">
+
+        <div class="slide active" data-index="0">
+            <div class="photo-section">
+                <div class="photo-placeholder">
+                    <div class="photo-placeholder-icon">📸</div>
+                    <div class="photo-placeholder-text">Hero Production Shot<br><small style="font-size: 0.7rem; opacity: 0.6;">Your eLite brand moment</small></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <span class="tag">Elight Media</span>
+                <h2>Visual <span>Excellence</span><br>Drives Bookings</h2>
+                <p>Production-led optimization. Behind-the-scenes mastery. Real salon transformations powered by We Must Create.</p>
+                <div class="button-group">
+                    <button class="cta-button" onclick="nextSlide()">See Process →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-index="1">
+            <div class="photo-section">
+                <div class="photo-placeholder">
+                    <div class="photo-placeholder-icon">🎬</div>
+                    <div class="photo-placeholder-text">In-Salon Photography<br><small style="font-size: 0.7rem; opacity: 0.6;">Professional equipment & team</small></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <span class="tag">Production Mastery</span>
+                <h2>We Capture <span>Your Artistry</span></h2>
+                <p>Professional in-salon photography & videography. Real transformations. Authentic storytelling that converts browsers into booked clients.</p>
+                <div class="button-group">
+                    <button class="cta-button cta-button-secondary" onclick="nextSlide()">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-index="2">
+            <div class="photo-section">
+                <div class="photo-placeholder">
+                    <div class="photo-placeholder-icon">💬</div>
+                    <div class="photo-placeholder-text">Content Calendar<br><small style="font-size: 0.7rem; opacity: 0.6;">Strategic planning & messaging</small></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <span class="tag">Brand Voice</span>
+                <h2>Consistency That <span>Builds Trust</span></h2>
+                <p>Tailored captions. Hashtag strategy. Multi-platform optimization across Instagram, Facebook, and TikTok. Your story, amplified.</p>
+                <div class="button-group">
+                    <button class="cta-button cta-button-secondary" onclick="nextSlide()">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-index="3">
+            <div class="photo-section">
+                <div class="photo-placeholder">
+                    <div class="photo-placeholder-icon">✓</div>
+                    <div class="photo-placeholder-text">2-Week Proof Results<br><small style="font-size: 0.7rem; opacity: 0.6;">Real analytics & engagement data</small></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <span class="tag">Proof of Concept</span>
+                <h2>14 Days to <span>Measurable Growth</span></h2>
+                <p>Foundation setup. Photoshoot. Initial content rollout. Track impressions, reach, and inquiries. Risk-free validation before scaling.</p>
+                <div class="button-group">
+                    <button class="cta-button cta-button-secondary" onclick="nextSlide()">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-index="4">
+            <div class="photo-section">
+                <div class="photo-placeholder">
+                    <div class="photo-placeholder-icon">📊</div>
+                    <div class="photo-placeholder-text">Monthly Analytics<br><small style="font-size: 0.7rem; opacity: 0.6;">Performance optimization & growth</small></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <span class="tag">Long-Term Growth</span>
+                <h2>Managed <span>Content Excellence</span></h2>
+                <p>3-4 posts weekly. Monthly in-salon shoots. Community management. Analytics-driven iteration. Your brand stays top-of-mind.</p>
+                <div class="button-group">
+                    <button class="cta-button cta-button-secondary" onclick="nextSlide()">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-index="5">
+            <div class="photo-section">
+                <div class="photo-placeholder">
+                    <div class="photo-placeholder-icon">💼</div>
+                    <div class="photo-placeholder-text">Investment Structure<br><small style="font-size: 0.7rem; opacity: 0.6;">Transparent pricing & commitment</small></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <span class="tag">Partnership</span>
+                <h2>Investment In <span>Your Growth</span></h2>
+                <p style="margin-bottom: 12px;"><strong>2-Week Proof:</strong> R2,500 | <strong>Ongoing:</strong> R5,500/month</p>
+                <p style="font-size: 0.9rem; color: var(--subtext);">Photoshoot • Content creation • Community management • Monthly analytics</p>
+                <div class="button-group">
+                    <a href="https://wa.me/27722350002?text=Hi%20Elight%20Media%2C%20I%27m%20interested%20in%20learning%20more%20about%20your%20visual%20optimization%20services." target="_blank" class="cta-button">Contact Brendan →</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <div class="nav-buttons">
+            <button class="btn-nav" id="prevBtn" aria-label="Previous Slide">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="btn-nav" id="nextBtn" aria-label="Next Slide">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">6</span></span>
+    </div>
+
+    <div class="keyboard-hint">
+        Use <span class="key">←</span> <span class="key">→</span> or click to navigate
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.slide');
+        const progressContainer = document.getElementById('progressContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideSpan = document.getElementById('currentSlide');
+        const totalSlidesSpan = document.getElementById('totalSlides');
+
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        totalSlidesSpan.textContent = totalSlides;
+
+        slides.forEach((_, index) => {
+            const bar = document.createElement('div');
+            bar.className = `progress-bar ${index === 0 ? 'active' : ''}`;
+            const fill = document.createElement('div');
+            fill.className = 'progress-fill';
+            bar.appendChild(fill);
+            progressContainer.appendChild(bar);
+        });
+
+        const progressBars = document.querySelectorAll('.progress-bar');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev', 'next');
+                
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                } else {
+                    slide.classList.add('next');
+                }
+            });
+
+            progressBars.forEach((bar, index) 
